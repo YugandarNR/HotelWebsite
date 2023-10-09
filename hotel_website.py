@@ -10,7 +10,7 @@ c = conn.cursor()
 #Create Database Tables if they do not exist
 #Create customers Table
 c.execute('''CREATE TABLE IF NOT EXISTS Customers (CustomerId INTEGER PRIMARY KEY AUTOINCREMENT, CustomerName VARCHAR(100),Phone VARCHAR(10),Street VARCHAR(50),City VARHCAR(50),State VARCHAR(50),Pincode INTEGER,Email VARCHAR(50),Password VARCHAR(15))''')
-#Create retaurants table
+#Create hotels table
 c.execute('''CREATE TABLE IF NOT EXISTS Hotels (HotelId INTEGER PRIMARY KEY AUTOINCREMENT, HotelName VARCHAR(100),Phone VARCHAR(10),Street VARCHAR(50),City VARHCAR(50),State VARCHAR(50),Pincode INTEGER,Email VARCHAR(50),Password VARCHAR(15))''')
 conn.commit()
 
@@ -29,7 +29,7 @@ def login():
         #Get Customer Name if Customer is logging in
         if user_type == 'Customer':
             c.execute(CUSTOMER_INFO, (phone, password))
-        #Get Restaurant Name if Restaurant is logging in
+        #Get Hotel Name if Hotel is logging in
         else:
             c.execute(HOTEL_INFO, (phone, password))
         account=c.fetchone()
@@ -41,7 +41,7 @@ def login():
             if user_type == 'Customer':
                 session['UserId'] = account[0]
                 return redirect("user_home")
-            #Render restaurant_home.html with restaurant name if restaurant is logging in
+            #Render Hotel_home.html with Hotel name if Hotel is logging in
             else:
                 session['RestId'] = account[0]
                 return redirect("/hotel_home")
@@ -68,7 +68,7 @@ def register():
             #If user_type is customer add user info to customers table
             if user_type == 'Customer':
                 c.execute(REGISTER_CUSTOMER_ENTRY,(name,phone,street,city,state,pincode,email,password))
-            #If user_type is Restaurant add info to restarurants table
+            #If user_type is Hotel add info to restarurants table
             else:
                 if delivery_fee:
                     c.execute(REGISTER_HOTEL_ENTRY,(name,phone,street,city,state,pincode,email,password))
