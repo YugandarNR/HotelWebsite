@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles.css')}}">
+
+    <title>Hotel Reservation System</title>
+</head>
+
+<body>
+    <header>
+        <h1> Hotel Reservation System</h1>
+    </header>
+    <div class="container">
+        <div class="form">
+            <form action="/login" method="POST">
+                <h2>Login/Register</h2>
+                <div class="form-row">
+                    <label for="user_type">User Type:</label>
+                    <select id="user_type" name="user_type" required>
+                        <option value="" disabled>Select User Type</option>
+                        <option value="Customer" selected>Customer</option>
+                        <option value="Hotel">Hotel</option>
+                    </select>
+                </div>
+                <label for="Phone">Phone:</label>
+                <input type="text" id="user-username" name="username" required>
+                <label for="user-password">Password:</label>
+                <input type="password" id="user-password" name="password" required>
+                <div>
+                    <input type="submit" value="Login">
+                </div>
+                <br>
+                <div class="msg">{{msg}}</div>
+            </form>
+            <p class="bottom">Don't have an account? <a href="{{url_for('register')}}"> Sign Up here</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
